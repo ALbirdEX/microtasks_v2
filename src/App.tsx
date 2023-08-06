@@ -6,6 +6,11 @@ import {Futer} from "./site/Futer";
 import {NewComponent} from "./NewComponent";
 import {CarsTable} from "./CarsTable";
 import {Button} from "./components/Button";
+import {ButtonUseState} from "./components/ButtonUseState";
+import {NewComponentFilter} from "./components/NewComponentFilter";
+
+
+export type FilterType = 'all' | 'dollar' | 'ruble'
 
 function App() {
     const [students, setStudents] = useState([
@@ -35,17 +40,30 @@ function App() {
 
     const topCars = [
         {manufacturer: 'BMW', model: 'X5'},
-        {manufacturer: 'Mersedes', model: 'MLS'},
+        {manufacturer: 'Mercedes', model: 'MLS'},
         {manufacturer: 'Audi', model: 'Q7'}
     ]
 
+    const [money, setMoney] = useState([
+        {banknote: "dollar", nominal: 100, number: "a123456789"},
+        {banknote: "dollar", nominal: 50, number: "b123456789"},
+        {banknote: "ruble", nominal: 100, number: "c123456789"},
+        {banknote: "dollar", nominal: 100, number: "d123456789"},
+        {banknote: "dollar", nominal: 50, number: "e123456789"},
+        {banknote: "ruble", nominal: 100, number: "f123456789"},
+        {banknote: "dollar", nominal: 50, number: "j123456789"},
+        {banknote: "ruble", nominal: 50, number: "h123456789"}
+    ])
 
-    // const myFirstSubscriber = (event:  MouseEvent<HTMLButtonElement>) => {
-    //     console.log("Hellow! Im Vasil")
-    // }
-    // const mySecondSubscriber = (event: MouseEvent<HTMLButtonElement>) => {
-    //     console.log("Hellow! Im Ivan")
-    // }
+    let [a, setA] = useState(1)
+
+
+    /*const myFirstSubscriber = (event:  MouseEvent<HTMLButtonElement>) => {
+        console.log("Hellow! Im Vasil")
+    }
+    const mySecondSubscriber = (event: MouseEvent<HTMLButtonElement>) => {
+        console.log("Hellow! Im Ivan")
+    }*/
 
     const onClickHandler = (name: string) => {
         console.log(name)
@@ -61,6 +79,31 @@ function App() {
         console.log("Im Stupid BUTTON")
     }
 
+    const onClickHandlerPlus = () => {
+        setA(++a);
+        console.log(a)
+    }
+    const onClickHandlerZero = () => {
+        setA(0)
+        console.log(a)
+    }
+
+
+    const [filter, setFilter] = useState<FilterType>("all")
+
+    let currentMoney = money;
+
+    if (filter === "dollar") {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknote === "dollar")
+    }
+    if (filter === "ruble") {
+        currentMoney = money.filter((filteredMoney) => filteredMoney.banknote === "ruble")
+    }
+
+
+    const onClickFilterHandler = (nameButton: FilterType) => {
+        setFilter(nameButton)
+    }
 
     return (
         <>
@@ -70,16 +113,50 @@ function App() {
             <NewComponent students={students}/>
             <CarsTable topCars={topCars}/>
 
-{/*
-            <div><button onClick={(event) => {console.log("Hellow")}}>MyYouTubeChanel-1</button></div>
-*/}
-            <div><button onClick={() => onClickHandler("Vasil")}>Chanel-1</button></div>
-            <div><button onClick={() => onClickHandler("Ivan")}>Chanel-2</button></div>
 
-            <Button name={"YouTubeChanel-1"} callBack={() => Button1Foo("Im Vasya", 21,  "liv in Mogilev")}/>
+            <div>
+                <button onClick={() => {
+                    console.log("Hellow")
+                }}>MyYouTubeChanel-1
+                </button>
+            </div>
+
+            <div>
+                <button onClick={() => onClickHandler("Vasil")}>Chanel-1</button>
+            </div>
+            <div>
+                <button onClick={() => onClickHandler("Ivan")}>Chanel-2</button>
+            </div>
+
+            <Button name={"YouTubeChanel-1"} callBack={() => Button1Foo("Im Vasya", 21, "liv in Mogilev")}/>
             <Button name={"YouTubeChanel-2"} callBack={() => Button2Foo("Im Ivan")}/>
             <Button name={"Stupid BUTTON"} callBack={Button3Foo}/>
 
+            <h1>{a}</h1>
+            <ButtonUseState name={"INC"} callBack={onClickHandlerPlus}/>
+            <ButtonUseState name={"ZERO"} callBack={onClickHandlerZero}/>
+
+            <NewComponentFilter currentMoney={currentMoney}
+                                callBack={onClickFilterHandler}/>
+           {/* <ul>
+                {currentMoney.map((objForMoneyArr, index) => {
+
+                    return (
+                        <li key={index}>
+                            <span> {objForMoneyArr.banknote}</span>
+                            <span> {objForMoneyArr.nominal}</span>
+                            <span> {objForMoneyArr.number}</span>
+                        </li>
+                    )
+                })}
+            </ul>
+
+            <div style={{marginLeft: "50px"}}>
+                <button onClick={() => onClickFilterHandler("all")}>all</button>
+                <button onClick={() => onClickFilterHandler("ruble")}>rubles</button>
+                <button onClick={() => onClickFilterHandler("dollar")}>dollars</button>
+            </div>
+*/}
         </>
     );
 }
