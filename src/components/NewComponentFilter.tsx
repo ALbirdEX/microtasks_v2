@@ -1,5 +1,6 @@
 import React from 'react';
 import {FilterType} from "../App";
+import {ButtonFilter} from "./ButtonFilter";
 
 type CurrentMoneyType = {
     banknote: string,
@@ -28,10 +29,13 @@ export const NewComponentFilter = (props: NewComponentFilterPropsType) => {
                 })}
             </ul>
 
-            <div style={{marginLeft: "50px", }}>
-                    <button onClick={() => props.callBack("all")}>all</button>
-                    <button onClick={() => props.callBack("ruble")}>rubles</button>
-                    <button onClick={() => props.callBack("dollar")}>dollars</button>
+            <div style={{marginLeft: "50px"}}>
+               {/* <button onClick={() => props.callBack("all")}>all</button>
+                <button onClick={() => props.callBack("ruble")}>rubles</button>
+                <button onClick={() => props.callBack("dollar")}>dollars</button>*/}
+                <ButtonFilter name={"all"} callBack={props.callBack}/>
+                <ButtonFilter name={"dollar"} callBack={props.callBack}/>
+                <ButtonFilter name={"ruble"} callBack={props.callBack}/>
             </div>
         </>
     );
