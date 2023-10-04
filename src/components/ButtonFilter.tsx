@@ -7,7 +7,10 @@ export type ButtonFilterPropsType = {
 }
 
 export const ButtonFilter = (props: ButtonFilterPropsType) => {
+
+    let onClickHandler = () => {props.callBack(props.name)}
+
     return (
-        <button onClick={() => props.callBack(props.name)}>{props.name}</button>
+        <button onClick={onClickHandler}>{props.name}</button>
     );
 };

@@ -1,4 +1,4 @@
-import React, {useState, MouseEvent} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Header} from "./site/Header";
 import {Body} from "./site/Body";
@@ -8,6 +8,7 @@ import {CarsTable} from "./CarsTable";
 import {Button} from "./components/Button";
 import {ButtonUseState} from "./components/ButtonUseState";
 import {NewComponentFilter} from "./components/NewComponentFilter";
+import {AllInput} from "./components/Input/AllInput";
 
 
 export type FilterType = 'all' | 'dollar' | 'ruble'
@@ -138,25 +139,11 @@ function App() {
 
             <NewComponentFilter currentMoney={currentMoney}
                                 callBack={onClickFilterHandler}/>
-           {/* <ul>
-                {currentMoney.map((objForMoneyArr, index) => {
 
-                    return (
-                        <li key={index}>
-                            <span> {objForMoneyArr.banknote}</span>
-                            <span> {objForMoneyArr.nominal}</span>
-                            <span> {objForMoneyArr.number}</span>
-                        </li>
-                    )
-                })}
-            </ul>
+            <AllInput/>
 
-            <div style={{marginLeft: "50px"}}>
-                <button onClick={() => onClickFilterHandler("all")}>all</button>
-                <button onClick={() => onClickFilterHandler("ruble")}>rubles</button>
-                <button onClick={() => onClickFilterHandler("dollar")}>dollars</button>
-            </div>
-*/}
+
+
         </>
     );
 }

@@ -14,11 +14,11 @@ type NewComponentFilterPropsType = {
 }
 
 export const NewComponentFilter = (props: NewComponentFilterPropsType) => {
+
     return (
         <>
             <ul>
                 {props.currentMoney.map((objForMoneyArr, index) => {
-
                     return (
                         <li key={index}>
                             <span> {objForMoneyArr.banknote}</span>
@@ -28,11 +28,7 @@ export const NewComponentFilter = (props: NewComponentFilterPropsType) => {
                     )
                 })}
             </ul>
-
             <div style={{marginLeft: "50px"}}>
-               {/* <button onClick={() => props.callBack("all")}>all</button>
-                <button onClick={() => props.callBack("ruble")}>rubles</button>
-                <button onClick={() => props.callBack("dollar")}>dollars</button>*/}
                 <ButtonFilter name={"all"} callBack={props.callBack}/>
                 <ButtonFilter name={"dollar"} callBack={props.callBack}/>
                 <ButtonFilter name={"ruble"} callBack={props.callBack}/>
